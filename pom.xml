@@ -13,6 +13,7 @@
         <module>retrieve-service</module>
         <module>point-shop-service</module>
         <module>api-service</module>
+        <module>authentication-service</module>
     </modules>
 
     <parent>
