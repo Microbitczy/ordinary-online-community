@@ -14,6 +14,7 @@
         <module>api-service</module>
         <module>authentication-service</module>
         <module>chat-server</module>
+        <module>gateway</module>
     </modules>
 
     <parent>
