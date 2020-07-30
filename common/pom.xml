@@ -22,6 +22,7 @@
             <artifactId>pojo</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
 
