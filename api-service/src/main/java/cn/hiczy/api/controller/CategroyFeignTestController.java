@@ -3,6 +3,8 @@ package cn.hiczy.api.controller;
 import cn.hiczy.feign.service.CategoryFeignService;
 import cn.hiczy.pojo.common.CommonResult;
 import cn.hiczy.pojo.post.entity.TCategory;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,11 +29,13 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("test")
-public class CategroyFeignTest {
+@Api(tags = "swagger测试",value = "hello")
+public class CategroyFeignTestController {
 
     @Resource
     private CategoryFeignService categoryFeignService;
 
+    @ApiOperation("返回分类")
     @GetMapping
     public CommonResult<TCategory> test() {
         return categoryFeignService.category(1L);

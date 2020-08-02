@@ -1,0 +1,14 @@
+
+
+# swagger 配置
+doc:
+  title: "BBS项目API"
+  description: "BBS项目API"
+  version: "1.0.0"
+  contact:
+    author: "czy77"
+    email: "czy_git@163.com"
+    site: "https://github.com/czy77/ordinary-online-community"
+
+swagger:
+  enable: true

@@ -22,6 +22,16 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
+
+        <!--    swagger2  文档生成     -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+
+
+
+        <!--公用模块-->
         <dependency>
             <groupId>cn.hiczy</groupId>
             <artifactId>common</artifactId>
