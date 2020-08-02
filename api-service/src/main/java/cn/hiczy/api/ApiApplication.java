@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /****************************************************************************
  * Copyright 2020 czy77/czy_git@163.com
@@ -26,6 +27,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient
 @EnableFeignClients("cn.hiczy.feign.service.**")
+@EnableOpenApi
 public class ApiApplication {
 
     public static void main(String[] args) {
