@@ -15,6 +15,8 @@
         <module>authentication-service</module>
         <module>chat-server</module>
         <module>gateway</module>
+        <module>chat-common</module>
+        <module>chat-client</module>
     </modules>
 
 
@@ -36,6 +38,9 @@
         <project.version>1.0-SNAPSHOT</project.version>
         <kotlin.version>1.3.72</kotlin.version>
         <swagger.version>3.0.0</swagger.version>
+        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
+        <netty.version>4.1.50.Final</netty.version>
+        <protobuf.version>3.12.2</protobuf.version>
     </properties>
 
 
@@ -47,6 +52,11 @@
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.hiczy</groupId>
+                <artifactId>feign-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--  微服务相关-->
             <dependency>
@@ -56,7 +66,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
+            <!-- alibaba-nacos-discovery -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -78,17 +88,52 @@
                 <version>${swagger.version}</version>
             </dependency>
 
+            <!--     mybatis-plus       -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
 
+
+            <!-- elasticsearch -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+
+            <!-- netty/netty-all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <!-- /protobuf-java -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java-util -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java-util</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+
+
+
+
+
+            <!-- kotlin -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

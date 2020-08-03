@@ -1,0 +1,4 @@
+
+chat-server:
+  backlog-num: 1024
+  port: 9333

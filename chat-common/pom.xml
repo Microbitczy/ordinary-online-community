@@ -9,27 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
-    <properties>
-        <project.version>1.0-SNAPSHOT</project.version>
-    </properties>
-
+    <artifactId>chat-common</artifactId>
 
     <dependencies>
-        <!--   pojo 模块   -->
+        <!-- protobuf-java -->
         <dependency>
-            <groupId>cn.hiczy</groupId>
-            <artifactId>pojo</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
         </dependency>
-        <!--   kotlin     -->
+        <!-- protobuf-java-util -->
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
         </dependency>
 
     </dependencies>
-
-
 
 </project>
