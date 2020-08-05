@@ -1,24 +1,28 @@
 syntax = "proto3";
-option java_outer_classname = "MessagePojo";
+
+import  "cn/hiczy/protobuf/AuthResponse.proto";
+import  "cn/hiczy/protobuf/PlainMessage.proto";
+
+option java_outer_classname = "MessageProto";
 
 message Message{
-  int64 m_id        = 1;    //消息id
-  MessageType type  = 2;    //消息类型
-  int64 from_id     = 3;    //发送人id
-  int64 to_id       = 4;    //接收人id
-  string content    = 5;    //消息内容
+  int64 m_id              = 1;    //消息id
+  MessageType type        = 2;    //消息类
+  oneof only_filed{
+    AuthResponse auth_rsp      = 3; //认证响应
+    PlainMessage plain_message = 4; //普通消息
+  }
+      //认证响应
+
+
 
   enum MessageType{
-    TEXT        = 0;        //文本消息
-    PICTURE     = 1;        //图片消息
-    FILE        = 2;        //文件消息
-    VOICE       = 3;        //语音消息
-    AUTH_REQ    = 4;        //认证请求
-    AUTH_RSP    = 5;        //认证响应
-    HEARTBEAT_REQ = 6;      //心跳检测请求
-    HEARTBEAT_RSP = 7;      //心跳检测响应
-    UPLOAD_RSP  = 8;        //上传操作响应
-    SEND_RSP    = 9;        //发送消息响应
+    PLAIN         = 0;
+    AUTH_REQ      = 1;        //认证请求
+    AUTH_RSP      = 2;        //认证响应
+    HEARTBEAT_REQ = 3;        //心跳检测请求
+    HEARTBEAT_RSP = 4;        //心跳检测响应
+    NORMAL_RSP    = 5;        //普通响应
   }
 
 }

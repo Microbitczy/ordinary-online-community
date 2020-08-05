@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_outer_classname = "AuthResponseProto";
+
+
+
+message AuthResponse{
+  int64 m_id        = 1;  //消息id
+  ResponseCode code = 2;  //登陆响应代码 0:响应失败, 1: 正常响应
+  string auth_url  = 3;  //登陆url
+
+  enum ResponseCode{
+    FAILED = 0;
+    OK = 1;
+  }
+
+}
