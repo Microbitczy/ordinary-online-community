@@ -38,6 +38,13 @@
             <artifactId>netty-all</artifactId>
         </dependency>
 
+        <!--  持久层相关      -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
