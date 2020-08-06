@@ -1,4 +1,4 @@
-package cn.hiczy.pojo.common.enums;
+package cn.hiczy.pojo.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

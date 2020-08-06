@@ -2,7 +2,7 @@ package cn.hiczy.feign.service.fallback;
 
 import cn.hiczy.feign.service.CategoryFeignService;
 import cn.hiczy.pojo.common.CommonResult;
-import cn.hiczy.pojo.common.enums.ResultEnum;
+import cn.hiczy.pojo.enums.ResultEnum;
 import cn.hiczy.pojo.post.entity.TCategory;
 import org.springframework.stereotype.Component;
 

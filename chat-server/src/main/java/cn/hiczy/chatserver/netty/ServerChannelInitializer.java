@@ -27,7 +27,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
         ch.pipeline()
                 //添加解码器相关组件
                 .addLast(new ProtobufVarint32FrameDecoder())
-                .addLast(new ProtobufDecoder(MessagePojo.Message.getDefaultInstance()))
+                .addLast(new ProtobufDecoder(MessageProto.Message.getDefaultInstance()))
 
                 //添加编码器相关组件
                 .addLast(new ProtobufVarint32LengthFieldPrepender())

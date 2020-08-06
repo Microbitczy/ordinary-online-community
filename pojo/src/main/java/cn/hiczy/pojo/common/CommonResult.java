@@ -1,6 +1,6 @@
 package cn.hiczy.pojo.common;
 
-import cn.hiczy.pojo.common.enums.ResultEnum;
+import cn.hiczy.pojo.enums.ResultEnum;
 import lombok.Data;
 
 /****************************************************************************

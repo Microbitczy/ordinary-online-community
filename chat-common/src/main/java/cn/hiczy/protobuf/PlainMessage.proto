@@ -3,13 +3,13 @@ option java_outer_classname = "PlainMessageProto";
 
 
 message PlainMessage{
-  int64 m_id        = 1;    //消息id
+//int64 m_id        = 1;    //消息id
   MessageType type  = 2;    //消息类型
   int64 from_id     = 3;    //发送人id
   int64 to_id       = 4;    //接收人id
   string content    = 5;    //消息内容
-  bytes file        = 6;    //文件消息
-  string jwt        = 7;    //jwt
+  int64 create_time = 6;    //时间戳
+  bytes files       = 7;    //文件消息
   enum MessageType{
     TEXT        = 0;        //文本消息
     PICTURE     = 1;        //图片消息
