@@ -1,16 +1,24 @@
 package cn.hiczy.chatserver.handler;
 
+import cn.hiczy.chatserver.mapper.TMessageRecordMapper;
 import cn.hiczy.entity.TMessageRecord;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.PlainMessageProto;
+import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+
+import javax.annotation.Resource;
 
 @Component
 public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
 
+    @Resource
+    private TMessageRecordMapper messageRecordMapper;
 
 
     /**
@@ -35,9 +43,24 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        //读取消息完成后返回 响应
+
+
         super.channelReadComplete(ctx);
     }
 
+
+    /**
+     * 当连接断开是被调用
+     * @param ctx
+     * @throws Exception
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //当连接断开时,将userId 从redis中移除
+
+        super.channelInactive(ctx);
+    }
 
     /**
      * 处理普通消息
@@ -46,21 +69,30 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
      */
     private MessageProto.Message handlePainMessage(MessageProto.Message msg){
         //第一次时校验JWT
-//        if()
+        if(ObjectUtils.isEmpty(msg) || ObjectUtils.isEmpty(msg.getJwt())){
+            //返回认证响应
+            return null;
+        }
+
+        //...层层认证...
+
+        //如果认证成功
+
+        //通过解析JWT 将userId作为key 存入 redis 中,过期时间和 jwt中的过期时间相同
+
+
 
         //接收到消息后存入数据库
         PlainMessageProto.PlainMessage plainMessage = msg.getPlainMessage();
-        TMessageRecord tMessageRecord = new TMessageRecord();
-        tMessageRecord.setContent(plainMessage.getContent())
-                .setCreateTime(plainMessage.getCreateTime())
-                .setFromId(plainMessage.getFromId())
-                .setToId(plainMessage.getToId())
-                .setMessageType(plainMessage.getType().getNumber());
-
-        //判断对方是否在线,如果不在线则存入
+        TMessageRecord tMessageRecord = ProtoMessageUtils.protoToBean(msg);
+        messageRecordMapper.insert(tMessageRecord);
+        //查询Redis中是否包含 toTd 以此 判断对方是否在线,如果不在线则将消息存入离线消息表中
 
 
         return null;
     }
+
+
+
 
 }
