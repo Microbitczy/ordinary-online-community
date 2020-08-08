@@ -6,15 +6,19 @@ import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 import org.springframework.stereotype.Component;
 
+import java.net.SocketAddress;
 
+
+/**
+ *  服务端发送消息给客户端
+ */
 @Component
 public class SenderHandler extends ChannelOutboundHandlerAdapter {
 
-
     @Override
-    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+    public void connect(ChannelHandlerContext ctx, SocketAddress remoteAddress, SocketAddress localAddress, ChannelPromise promise) throws Exception {
 
-
-        super.write(ctx, msg, promise);
+        super.connect(ctx, remoteAddress, localAddress, promise);
     }
+
 }

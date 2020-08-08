@@ -13,16 +13,20 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 
+
+/**
+ * 服务器收到消息时的处理方式
+ */
 @Component
 public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
 
-    @Resource
-    private TMessageRecordMapper messageRecordMapper;
+//    @Resource
+//    private TMessageRecordMapper messageRecordMapper;
 
 
     /**
-     * 收到消息时的处理方式
+     * 服务器收到消息时的处理方式
      * @param ctx
      * @param msg
      * @throws Exception
@@ -34,8 +38,8 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
         switch (receiveMsg.getType()){
             //普通消息
             case PLAIN: handlePainMessage(receiveMsg); break;
-            //处理认证请求
-            case AUTH_REQ: break;
+//            //处理认证请求
+//            case AUTH_REQ: break;
         }
 
     }
@@ -85,7 +89,9 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
         //接收到消息后存入数据库
         PlainMessageProto.PlainMessage plainMessage = msg.getPlainMessage();
         TMessageRecord tMessageRecord = ProtoMessageUtils.protoToBean(msg);
-        messageRecordMapper.insert(tMessageRecord);
+        System.out.println(tMessageRecord);
+        System.out.println("接受到消息" + tMessageRecord.getContent());
+        //messageRecordMapper.insert(tMessageRecord);
         //查询Redis中是否包含 toTd 以此 判断对方是否在线,如果不在线则将消息存入离线消息表中
 
 

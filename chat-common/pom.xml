@@ -12,6 +12,13 @@
     <artifactId>chat-common</artifactId>
 
     <dependencies>
+
+        <!-- netty/netty-all -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
         <!-- protobuf-java -->
         <dependency>
             <groupId>com.google.protobuf</groupId>

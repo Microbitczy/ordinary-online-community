@@ -11,5 +11,11 @@
 
     <artifactId>chat-client</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.hiczy</groupId>
+            <artifactId>chat-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

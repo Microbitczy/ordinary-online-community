@@ -28,7 +28,7 @@ public class ChatServer implements InitializingBean, DisposableBean {
 
 
     @Value("chat-server.backlog-num")
-    private Integer backlogNum;
+    private String backlogNum;
 
     @Value("chat-server.port")
     private Integer port;
@@ -40,16 +40,16 @@ public class ChatServer implements InitializingBean, DisposableBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(boss,worker)
+        bootstrap.group(boss, worker)
 
                 //服务段可连接队列数-->对应TCP/IP 协议listen 函数中backlog函数
-                .option(ChannelOption.SO_BACKLOG,backlogNum)
+                .option(ChannelOption.SO_BACKLOG, Integer.valueOf(backlogNum))
 
                 //设置TCP长连接,一般如果两小时内没有数据的通信时,TCP会自动发送一个活动探测数据报文
-                .childOption(ChannelOption.SO_KEEPALIVE,true)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
 
                 //关闭Nagle算法,及时传输数据. Nagle算法:将小的数据包包装成更大的帧进行传送,提高网络的负载,即 TCP延迟传输
-                .childOption(ChannelOption.TCP_NODELAY,true)
+                .childOption(ChannelOption.TCP_NODELAY, true)
 
                 .childHandler(new ServerChannelInitializer());
 
