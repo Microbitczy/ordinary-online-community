@@ -1,7 +1,9 @@
 package cn.hiczy.chatserver.netty;
 
+import cn.hiczy.chatserver.handler.AuthHandler;
 import cn.hiczy.chatserver.handler.ReceiverHandler;
 import cn.hiczy.chatserver.handler.SenderHandler;
+import cn.hiczy.protobuf.MessageProto;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
@@ -18,9 +20,11 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
     @Autowired
     private SenderHandler senderHandler;
 
+    @Autowired
+    private AuthHandler authHandler;
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-
 
 
 
@@ -34,6 +38,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
                 .addLast(new ProtobufEncoder())
 
                 //添加自定义业务逻辑处理器
+                .addLast(authHandler)
                 .addLast(receiverHandler)
                 .addLast(senderHandler);
     }

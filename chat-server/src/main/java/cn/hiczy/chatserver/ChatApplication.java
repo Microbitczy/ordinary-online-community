@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("cn.hiczy.chatserver.netty")
+@ComponentScan("cn.hiczy.chatserver.*")
 @MapperScan("cn.hiczy.chatserver.mapper.*")
 public class ChatApplication {
 
