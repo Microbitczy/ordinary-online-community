@@ -2,4 +2,9 @@
 chat-server:
   backlog-num: 1024
   port: 9333
-
+spring:
+  datasource:
+    username: root
+    password: 123456@czy
+    url: jdbc:mysql://121.199.31.223:6606/message_db
+    driver-class-name: com.mysql.cj.jdbc.Driver

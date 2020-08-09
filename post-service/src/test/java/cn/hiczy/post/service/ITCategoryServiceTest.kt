@@ -1,6 +1,6 @@
 package cn.hiczy.post.service
 
-import cn.hiczy.pojo.post.entity.TCategory
+import cn.hiczy.pojo.post.TCategory
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest

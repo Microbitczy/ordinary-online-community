@@ -1,6 +1,6 @@
 package cn.hiczy.post.service;
 
-import cn.hiczy.pojo.post.entity.TComment;
+import cn.hiczy.pojo.post.TComment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

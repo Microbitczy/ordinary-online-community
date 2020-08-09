@@ -1,4 +1,4 @@
-package cn.hiczy.pojo.post.entity;
+package cn.hiczy.pojo.post;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;

@@ -3,11 +3,12 @@ package cn.hiczy.chatserver;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("cn.hiczy.chatserver.*")
-@MapperScan("cn.hiczy.chatserver.mapper.*")
+@MapperScan("cn.hiczy.chatserver.mapper")
 public class ChatApplication {
 
     public static void main(String[] args) {

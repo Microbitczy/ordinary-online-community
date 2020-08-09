@@ -1,8 +1,8 @@
 package cn.hiczy.protobuf.utils;
 
 
-import cn.hiczy.entity.TMessageRecord;
-import cn.hiczy.enums.MessageType;
+import cn.hiczy.protobuf.entity.*;
+import cn.hiczy.protobuf.AuthResponseProto;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.PlainMessageProto;
 
@@ -36,7 +36,6 @@ public class ProtoMessageUtils {
      */
     public static MessageProto.Message beanToPlainMsg(TMessageRecord messageRecord){
         PlainMessageProto.PlainMessage plainMessage = PlainMessageProto.PlainMessage.newBuilder().setContent(messageRecord.getContent())
-                .setCreateTime(messageRecord.getCreateTime())
                 .setFromId(messageRecord.getFromId())
                 .setToId(messageRecord.getToId())
                 .setTypeValue(messageRecord.getMessageType())
@@ -44,6 +43,18 @@ public class ProtoMessageUtils {
 
         return MessageProto.Message.newBuilder().setMId(messageRecord.getMId())
                 .setPlainMessage(plainMessage).build();
+    }
+
+
+    public static MessageProto.Message buildAuthRsp() {
+        AuthResponseProto.AuthResponse authRsp = AuthResponseProto.AuthResponse.newBuilder()
+                .setAuthUrl("localhost:8080")
+                .setCode(AuthResponseProto.AuthResponse.ResponseCode.FAILED)
+                .build();
+
+        return MessageProto.Message.newBuilder()
+                .setAuthRsp(authRsp)
+                .build();
     }
 
 

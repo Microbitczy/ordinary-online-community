@@ -2,7 +2,7 @@ package cn.hiczy.api.controller;
 
 import cn.hiczy.feign.service.CategoryFeignService;
 import cn.hiczy.pojo.common.CommonResult;
-import cn.hiczy.pojo.post.entity.TCategory;
+import cn.hiczy.pojo.post.TCategory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

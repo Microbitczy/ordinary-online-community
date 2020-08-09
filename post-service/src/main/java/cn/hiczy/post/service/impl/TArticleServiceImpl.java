@@ -1,6 +1,6 @@
 package cn.hiczy.post.service.impl;
 
-import cn.hiczy.pojo.post.entity.TArticle;
+import cn.hiczy.pojo.post.TArticle;
 import cn.hiczy.post.mapper.TArticleMapper;
 import cn.hiczy.post.service.ITArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

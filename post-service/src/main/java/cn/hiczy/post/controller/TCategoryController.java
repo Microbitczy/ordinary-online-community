@@ -3,9 +3,8 @@ package cn.hiczy.post.controller;
 
 import cn.hiczy.feign.service.CategoryFeignService;
 import cn.hiczy.pojo.common.CommonResult;
-import cn.hiczy.pojo.post.entity.TCategory;
+import cn.hiczy.pojo.post.TCategory;
 import cn.hiczy.post.service.ITCategoryService;
-import cn.hiczy.post.service.impl.TCategoryServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

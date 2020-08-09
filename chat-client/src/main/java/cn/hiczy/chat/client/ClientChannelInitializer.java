@@ -1,6 +1,7 @@
 package cn.hiczy.chat.client;
 
 import cn.hiczy.chat.client.handler.LoginHandler;
+import cn.hiczy.chat.client.handler.MyClientHandler;
 import cn.hiczy.protobuf.MessageProto;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -16,12 +17,12 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
     protected void initChannel(SocketChannel ch) throws Exception {
 
         ch.pipeline()
-                .addLast(new ProtobufDecoder(MessageProto.Message.getDefaultInstance()))
                 .addLast(new ProtobufVarint32FrameDecoder())
-                .addLast(new ProtobufEncoder())
+                .addLast(new ProtobufDecoder(MessageProto.Message.getDefaultInstance()))
+
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
-
-
+                .addLast(new ProtobufEncoder())
                 .addLast(new LoginHandler());
+                //.addLast(new MyClientHandler());
     }
 }

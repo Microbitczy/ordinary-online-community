@@ -1,6 +1,6 @@
 package cn.hiczy.post.service.impl;
 
-import cn.hiczy.pojo.post.entity.TCategory;
+import cn.hiczy.pojo.post.TCategory;
 import cn.hiczy.post.mapper.TCategoryMapper;
 import cn.hiczy.post.service.ITCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

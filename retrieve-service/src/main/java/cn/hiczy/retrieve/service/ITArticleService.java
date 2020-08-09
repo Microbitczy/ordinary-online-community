@@ -1,6 +1,6 @@
 package cn.hiczy.retrieve.service;
 
-import cn.hiczy.pojo.post.entity.TArticle;
+import cn.hiczy.pojo.post.TArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
