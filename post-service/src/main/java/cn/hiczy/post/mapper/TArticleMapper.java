@@ -1,6 +1,6 @@
 package cn.hiczy.post.mapper;
 
-import cn.hiczy.pojo.post.entity.TArticle;
+import cn.hiczy.pojo.post.TArticle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

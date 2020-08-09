@@ -1,4 +1,4 @@
-package cn.hiczy.pojo.post.entity;
+package cn.hiczy.pojo.post;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

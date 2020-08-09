@@ -1,6 +1,6 @@
 package cn.hiczy.retrieve.service.impl;
 
-import cn.hiczy.pojo.post.entity.TComment;
+import cn.hiczy.pojo.post.TComment;
 import cn.hiczy.retrieve.mapper.TCommentMapper;
 import cn.hiczy.retrieve.service.ITCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

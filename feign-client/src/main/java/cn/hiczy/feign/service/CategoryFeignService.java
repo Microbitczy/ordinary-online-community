@@ -2,7 +2,7 @@ package cn.hiczy.feign.service;
 
 import cn.hiczy.feign.service.fallback.CategoryFeignServiceFallback;
 import cn.hiczy.pojo.common.CommonResult;
-import cn.hiczy.pojo.post.entity.TCategory;
+import cn.hiczy.pojo.post.TCategory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
