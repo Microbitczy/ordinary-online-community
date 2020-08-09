@@ -21,7 +21,7 @@ public class LoginHandler extends ChannelInboundHandlerAdapter {
                 .setMId(3)
                 .setPlainMessage(PlainMessageProto.PlainMessage.newBuilder().build())
                 .setType(MessageProto.Message.MessageType.AUTH_REQ)
-                .setJwt("auth")
+                .setJwt("ss")
                 .build();
 
         ctx.writeAndFlush(auth);

@@ -63,9 +63,9 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //一上线就提示登陆
         //提示登陆
-        MessageProto.Message message = ProtoMessageUtils.buildAuthRsp();
-
-        ctx.writeAndFlush(message);
+//        MessageProto.Message message = ProtoMessageUtils.buildAuthRsp();
+//
+//        ctx.writeAndFlush(message);
     }
 
 

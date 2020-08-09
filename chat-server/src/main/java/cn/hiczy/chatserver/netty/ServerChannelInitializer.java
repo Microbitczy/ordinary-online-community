@@ -1,6 +1,7 @@
 package cn.hiczy.chatserver.netty;
 
 import cn.hiczy.chatserver.handler.AuthHandler;
+import cn.hiczy.chatserver.handler.OfflineMessageHandler;
 import cn.hiczy.chatserver.handler.ReceiverHandler;
 import cn.hiczy.chatserver.handler.SenderHandler;
 import cn.hiczy.protobuf.MessageProto;
@@ -28,6 +29,9 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
     @Resource
     private AuthHandler authHandler;
 
+    @Resource
+    private OfflineMessageHandler offlineMessageHandler;
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
 
@@ -40,8 +44,10 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
                 //添加编码器相关组件
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new ProtobufEncoder())
-                .addLast("authHandler",authHandler)
+                .addLast(authHandler)
+                .addLast(offlineMessageHandler)
                 .addLast(receiverHandler)
                 .addLast(senderHandler);
+
     }
 }

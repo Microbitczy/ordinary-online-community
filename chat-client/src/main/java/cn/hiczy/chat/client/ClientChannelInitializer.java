@@ -22,7 +22,7 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
 
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new ProtobufEncoder())
-                .addLast(new LoginHandler())
-                .addLast(new MyClientHandler());
+                .addLast(new LoginHandler());
+                //.addLast(new MyClientHandler());
     }
 }

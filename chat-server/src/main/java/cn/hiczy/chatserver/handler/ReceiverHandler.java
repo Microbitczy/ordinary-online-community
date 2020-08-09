@@ -1,5 +1,6 @@
 package cn.hiczy.chatserver.handler;
 
+import cn.hiczy.chatserver.mapper.TMessageRecordMapper;
 import cn.hiczy.protobuf.entity.TMessageRecord;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.PlainMessageProto;
@@ -10,6 +11,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
+
 
 /**
  * 服务器收到消息时的处理方式
@@ -19,8 +22,8 @@ import org.springframework.util.ObjectUtils;
 public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
 
-//    @Resource
-//    private TMessageRecordMapper messageRecordMapper;
+    @Resource
+    private TMessageRecordMapper messageRecordMapper;
 
 
     /**
@@ -91,7 +94,7 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
         TMessageRecord tMessageRecord = ProtoMessageUtils.protoToBean(msg);
         System.out.println(tMessageRecord);
         System.out.println("接受到消息" + tMessageRecord.getContent());
-        //messageRecordMapper.insert(tMessageRecord);
+        messageRecordMapper.insert(tMessageRecord);
         //查询Redis中是否包含 toTd 以此 判断对方是否在线,如果不在线则将消息存入离线消息表中
 
 
