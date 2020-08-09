@@ -2,9 +2,13 @@ package cn.hiczy.chatserver.handler;
 
 import cn.hiczy.protobuf.AuthResponseProto;
 import cn.hiczy.protobuf.MessageProto;
+import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,35 +17,39 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 认证处理器,每个连接进来都要首先经过这个处理器
  */
+@Component
+@ChannelHandler.Sharable
 public class AuthHandler extends ChannelInboundHandlerAdapter {
 
-    ConcurrentHashMap<Channel, String> sessionMap = new ConcurrentHashMap<>();
+//    ConcurrentHashMap<Channel, String> sessionMap = new ConcurrentHashMap<>();
+//
+
+
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        //校验登陆
         MessageProto.Message message = (MessageProto.Message) msg;
-        if (sessionMap.containsKey(message.getSessionId())) {
 
-        }
+        System.out.println(message);
+        System.out.println(message.getJwt());
+        System.out.println(message.getSessionId());
+        System.out.println(message.getType());
+        System.out.println(message.getPlainMessage());
 
 
+
+
+        //校验登陆
         if(message.getType().equals(MessageProto.Message.MessageType.AUTH_REQ)){
-            message.getJwt().equals("auth");
-            String sessionId = UUID.randomUUID().toString().substring(0, 8);
-            sessionMap.put( ctx.channel(),sessionId);
+            if (isAuthed(message.getJwt())) {
+                ctx.pipeline().remove(this);
+                super.channelRead(ctx, msg);
+                return;
+            }
         }
-
-        //提示登陆
-        AuthResponseProto.AuthResponse authRsp = AuthResponseProto.AuthResponse.newBuilder()
-                .setCode(AuthResponseProto.AuthResponse.ResponseCode.FAILED)
-                .build();
-
-        MessageProto.Message.newBuilder()
-                .setAuthRsp(authRsp);
-
+        //如果不是登陆请求拒绝访问
+        MessageProto.Message authRsp = ProtoMessageUtils.buildAuthRsp();
         ctx.writeAndFlush(authRsp);
-
 
     }
 
@@ -54,10 +62,10 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //一上线就提示登陆
+        //提示登陆
+        MessageProto.Message message = ProtoMessageUtils.buildAuthRsp();
 
-
-
-        super.channelActive(ctx);
+        ctx.writeAndFlush(message);
     }
 
 
@@ -68,6 +76,22 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //断开连接
+
+
+        System.out.println("断开连接");
         super.channelInactive(ctx);
     }
+
+
+    /**
+     * 通过解析jwt判断是否登陆
+     */
+    private boolean isAuthed(String jwt){
+        if(StringUtils.isEmpty(jwt))
+            return false;
+        return true;
+    }
+
+
 }

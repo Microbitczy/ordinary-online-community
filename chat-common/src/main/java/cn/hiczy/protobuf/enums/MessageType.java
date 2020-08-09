@@ -1,4 +1,4 @@
-package cn.hiczy.enums;
+package cn.hiczy.protobuf.enums;
 
 import lombok.AllArgsConstructor;
 

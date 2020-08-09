@@ -1,23 +1,21 @@
 package cn.hiczy.chatserver.handler;
 
-import cn.hiczy.chatserver.mapper.TMessageRecordMapper;
-import cn.hiczy.entity.TMessageRecord;
+import cn.hiczy.protobuf.entity.TMessageRecord;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.PlainMessageProto;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-
-import javax.annotation.Resource;
 
 
 /**
  * 服务器收到消息时的处理方式
  */
 @Component
+@ChannelHandler.Sharable
 public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
 
@@ -34,6 +32,8 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         MessageProto.Message receiveMsg = (MessageProto.Message) msg;
+        System.out.println("Receiver msg =======");
+        System.out.println(receiveMsg);
         //判断接受的消息类型
         switch (receiveMsg.getType()){
             //普通消息
@@ -73,10 +73,10 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
      */
     private MessageProto.Message handlePainMessage(MessageProto.Message msg){
         //第一次时校验JWT
-        if(ObjectUtils.isEmpty(msg) || ObjectUtils.isEmpty(msg.getJwt())){
-            //返回认证响应
-            return null;
-        }
+//        if(ObjectUtils.isEmpty(msg) || ObjectUtils.isEmpty(msg.getJwt())){
+//            //返回认证响应
+//            return null;
+//        }
 
         //...层层认证...
 

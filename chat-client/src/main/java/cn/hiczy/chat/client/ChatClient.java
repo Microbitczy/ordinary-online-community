@@ -1,11 +1,9 @@
 package cn.hiczy.chat.client;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelInitializer;
+
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class ChatClient {
@@ -20,7 +18,7 @@ public class ChatClient {
                 .channel(NioSocketChannel.class)
                 .handler(new ClientChannelInitializer());
 
-        bootstrap.connect("localhost",6888).sync();
+        bootstrap.connect("localhost",9333).sync();
 
     }
 

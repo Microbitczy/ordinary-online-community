@@ -11,21 +11,25 @@ import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
+
+@Component
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    @Autowired
+    @Resource
     private ReceiverHandler receiverHandler;
 
-    @Autowired
+    @Resource
     private SenderHandler senderHandler;
 
-    @Autowired
+    @Resource
     private AuthHandler authHandler;
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-
 
 
         ch.pipeline()
@@ -36,9 +40,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
                 //添加编码器相关组件
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new ProtobufEncoder())
-
-                //添加自定义业务逻辑处理器
-                .addLast(authHandler)
+                .addLast("authHandler",authHandler)
                 .addLast(receiverHandler)
                 .addLast(senderHandler);
     }
