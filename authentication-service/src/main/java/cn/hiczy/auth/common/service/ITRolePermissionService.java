@@ -1,4 +1,4 @@
-package cn.hiczy.auth.service;
+package cn.hiczy.auth.common.service;
 
 import cn.hiczy.pojo.authtication.TRolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -1,7 +1,7 @@
-package cn.hiczy.auth.service.impl;
+package cn.hiczy.auth.common.service.impl;
 
-import cn.hiczy.auth.mapper.TRolePermissionMapper;
-import cn.hiczy.auth.service.ITRolePermissionService;
+import cn.hiczy.auth.common.mapper.TRolePermissionMapper;
+import cn.hiczy.auth.common.service.ITRolePermissionService;
 import cn.hiczy.pojo.authtication.TRolePermission;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

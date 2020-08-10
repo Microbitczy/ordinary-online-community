@@ -1,8 +1,8 @@
-package cn.hiczy.auth.service.impl;
+package cn.hiczy.auth.common.service.impl;
 
 import cn.hiczy.pojo.authtication.TUserRole;
-import cn.hiczy.auth.mapper.TUserRoleMapper;
-import cn.hiczy.auth.service.ITUserRoleService;
+import cn.hiczy.auth.common.mapper.TUserRoleMapper;
+import cn.hiczy.auth.common.service.ITUserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

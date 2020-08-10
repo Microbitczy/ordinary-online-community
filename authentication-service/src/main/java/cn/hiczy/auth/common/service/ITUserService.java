@@ -1,4 +1,4 @@
-package cn.hiczy.auth.service;
+package cn.hiczy.auth.common.service;
 
 import cn.hiczy.pojo.authtication.TUser;
 import com.baomidou.mybatisplus.extension.service.IService;

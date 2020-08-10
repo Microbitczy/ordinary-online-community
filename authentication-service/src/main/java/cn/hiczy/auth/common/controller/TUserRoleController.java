@@ -1,4 +1,4 @@
-package cn.hiczy.auth.controller;
+package cn.hiczy.auth.common.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
