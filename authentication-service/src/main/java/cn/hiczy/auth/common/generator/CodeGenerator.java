@@ -1,4 +1,4 @@
-//package cn.hiczy.auth.generator;
+//package cn.hiczy.auth.common.generator;
 //
 //
 //

@@ -1,4 +1,4 @@
-package cn.hiczy.auth.mapper;
+package cn.hiczy.auth.common.mapper;
 
 
 import cn.hiczy.pojo.authtication.TPermission;
