@@ -42,6 +42,7 @@
         <netty.version>4.1.50.Final</netty.version>
         <protobuf.version>3.12.2</protobuf.version>
         <jwt.version>0.9.1</jwt.version>
+        <hutools.version>5.3.10</hutools.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -139,6 +140,12 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutools.version}</version>
             </dependency>
 
         </dependencies>
