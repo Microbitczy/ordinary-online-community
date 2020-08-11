@@ -370,6 +370,30 @@ public final class MessageProto {
        * <code>NORMAL_RSP = 5;</code>
        */
       NORMAL_RSP(5),
+      /**
+       * <pre>
+       *客户端发来的离线消息请求
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_REQ = 6;</code>
+       */
+      OFFLINE_MSG_REQ(6),
+      /**
+       * <pre>
+       *客户端返回的离线消息接收响应
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_RCV = 7;</code>
+       */
+      OFFLINE_MSG_RCV(7),
+      /**
+       * <pre>
+       *服务器发送给客户端的离线消息
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_RSP = 8;</code>
+       */
+      OFFLINE_MSG_RSP(8),
       UNRECOGNIZED(-1),
       ;
 
@@ -421,6 +445,30 @@ public final class MessageProto {
        * <code>NORMAL_RSP = 5;</code>
        */
       public static final int NORMAL_RSP_VALUE = 5;
+      /**
+       * <pre>
+       *客户端发来的离线消息请求
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_REQ = 6;</code>
+       */
+      public static final int OFFLINE_MSG_REQ_VALUE = 6;
+      /**
+       * <pre>
+       *客户端返回的离线消息接收响应
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_RCV = 7;</code>
+       */
+      public static final int OFFLINE_MSG_RCV_VALUE = 7;
+      /**
+       * <pre>
+       *服务器发送给客户端的离线消息
+       * </pre>
+       *
+       * <code>OFFLINE_MSG_RSP = 8;</code>
+       */
+      public static final int OFFLINE_MSG_RSP_VALUE = 8;
 
 
       public final int getNumber() {
@@ -453,6 +501,9 @@ public final class MessageProto {
           case 3: return HEARTBEAT_REQ;
           case 4: return HEARTBEAT_RSP;
           case 5: return NORMAL_RSP;
+          case 6: return OFFLINE_MSG_REQ;
+          case 7: return OFFLINE_MSG_RCV;
+          case 8: return OFFLINE_MSG_RSP;
           default: return null;
         }
       }
@@ -2185,16 +2236,18 @@ public final class MessageProto {
   static {
     String[] descriptorData = {
       "\n\rMessage.proto\032\022AuthResponse.proto\032\022Pla" +
-      "inMessage.proto\032\024NormalResponse.proto\"\315\002" +
+      "inMessage.proto\032\024NormalResponse.proto\"\215\003" +
       "\n\007Message\022\014\n\004m_id\030\001 \001(\003\022\"\n\004type\030\002 \001(\0162\024." +
       "Message.MessageType\022!\n\010auth_rsp\030\003 \001(\0132\r." +
       "AuthResponseH\000\022&\n\rplain_message\030\004 \001(\0132\r." +
       "PlainMessageH\000\022*\n\017normal_response\030\005 \001(\0132" +
       "\017.NormalResponseH\000\022\022\n\nsession_id\030\006 \001(\t\022\013" +
-      "\n\003jwt\030\007 \001(\t\"j\n\013MessageType\022\t\n\005PLAIN\020\000\022\014\n" +
-      "\010AUTH_REQ\020\001\022\014\n\010AUTH_RSP\020\002\022\021\n\rHEARTBEAT_R" +
-      "EQ\020\003\022\021\n\rHEARTBEAT_RSP\020\004\022\016\n\nNORMAL_RSP\020\005B" +
-      "\014\n\nonly_filedB\016B\014MessageProtob\006proto3"
+      "\n\003jwt\030\007 \001(\t\"\251\001\n\013MessageType\022\t\n\005PLAIN\020\000\022\014" +
+      "\n\010AUTH_REQ\020\001\022\014\n\010AUTH_RSP\020\002\022\021\n\rHEARTBEAT_" +
+      "REQ\020\003\022\021\n\rHEARTBEAT_RSP\020\004\022\016\n\nNORMAL_RSP\020\005" +
+      "\022\023\n\017OFFLINE_MSG_REQ\020\006\022\023\n\017OFFLINE_MSG_RCV" +
+      "\020\007\022\023\n\017OFFLINE_MSG_RSP\020\010B\014\n\nonly_filedB\016B" +
+      "\014MessageProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

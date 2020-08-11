@@ -6,9 +6,6 @@ import cn.hiczy.protobuf.enums.MessageType;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelOutboundHandlerAdapter;
-
-import java.util.UUID;
 
 public class MyClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -29,7 +26,7 @@ public class MyClientHandler extends ChannelInboundHandlerAdapter {
         messageRecord.setToId(3L);
         messageRecord.setMessageType(MessageType.TEXT.getCode());
 
-        MessageProto.Message message = ProtoMessageUtils.beanToPlainMsg(messageRecord);
+        MessageProto.Message message = ProtoMessageUtils.convertToMessage(messageRecord);
         ctx.writeAndFlush(message);
     }
 }

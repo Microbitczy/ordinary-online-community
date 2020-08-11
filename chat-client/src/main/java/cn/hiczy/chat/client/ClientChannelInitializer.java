@@ -1,7 +1,6 @@
 package cn.hiczy.chat.client;
 
 import cn.hiczy.chat.client.handler.LoginHandler;
-import cn.hiczy.chat.client.handler.MyClientHandler;
 import cn.hiczy.protobuf.MessageProto;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
