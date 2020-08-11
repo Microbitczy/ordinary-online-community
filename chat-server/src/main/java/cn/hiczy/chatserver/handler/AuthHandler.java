@@ -1,17 +1,12 @@
 package cn.hiczy.chatserver.handler;
 
-import cn.hiczy.protobuf.AuthResponseProto;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -48,7 +43,7 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
             }
         }
         //如果不是登陆请求拒绝访问
-        MessageProto.Message authRsp = ProtoMessageUtils.buildAuthRsp();
+        MessageProto.Message authRsp = ProtoMessageUtils.createAuthRsp();
         ctx.writeAndFlush(authRsp);
 
     }

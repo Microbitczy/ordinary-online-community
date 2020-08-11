@@ -1,15 +1,14 @@
 package cn.hiczy.chatserver.handler;
 
 import cn.hiczy.chatserver.mapper.TMessageRecordMapper;
-import cn.hiczy.protobuf.entity.TMessageRecord;
 import cn.hiczy.protobuf.MessageProto;
+import cn.hiczy.protobuf.entity.TMessageRecord;
 import cn.hiczy.protobuf.PlainMessageProto;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 
@@ -91,7 +90,7 @@ public class ReceiverHandler extends ChannelInboundHandlerAdapter {
 
         //接收到消息后存入数据库
         PlainMessageProto.PlainMessage plainMessage = msg.getPlainMessage();
-        TMessageRecord tMessageRecord = ProtoMessageUtils.protoToBean(msg);
+        TMessageRecord tMessageRecord = ProtoMessageUtils.convertToTMessageRecord(msg);
         System.out.println(tMessageRecord);
         System.out.println("接受到消息" + tMessageRecord.getContent());
         messageRecordMapper.insert(tMessageRecord);

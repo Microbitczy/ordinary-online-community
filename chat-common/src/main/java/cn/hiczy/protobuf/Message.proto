@@ -10,9 +10,9 @@ message Message{
   int64 m_id                       = 1;    //消息id
   MessageType type                 = 2;    //消息类
   oneof only_filed{
-    AuthResponse auth_rsp          = 3; //认证响应
-    PlainMessage plain_message     = 4; //普通消息
-    NormalResponse normal_response = 5; //普通响应
+    AuthResponse auth_rsp          = 3;    //认证响应
+    PlainMessage plain_message     = 4;    //普通消息
+    NormalResponse normal_response = 5;    //普通响应
   }
 
   string session_id       = 6;    //会话id
@@ -20,12 +20,16 @@ message Message{
 
   /*消息类型*/
   enum MessageType{
-    PLAIN         = 0;        //普通消息
-    AUTH_REQ      = 1;        //认证请求
-    AUTH_RSP      = 2;        //认证响应
-    HEARTBEAT_REQ = 3;        //心跳检测请求
-    HEARTBEAT_RSP = 4;        //心跳检测响应
-    NORMAL_RSP    = 5;        //普通响应
+    PLAIN           = 0;        //普通消息
+    AUTH_REQ        = 1;        //认证请求
+    AUTH_RSP        = 2;        //认证响应
+    HEARTBEAT_REQ   = 3;        //心跳检测请求
+    HEARTBEAT_RSP   = 4;        //心跳检测响应
+    NORMAL_RSP      = 5;        //普通响应
+    OFFLINE_MSG_REQ = 6;        //客户端发来的离线消息请求
+    OFFLINE_MSG_RCV = 7;        //客户端返回的离线消息接收响应
+    OFFLINE_MSG_RSP = 8;        //服务器发送给客户端的离线消息
+
   }
 
 }

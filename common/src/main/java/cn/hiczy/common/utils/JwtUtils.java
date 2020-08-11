@@ -26,12 +26,12 @@ public class JwtUtils {
 
     /**
      * 创建JWT令牌
-     * @param username      用户名
+     * @param userId        用户名id
      * @param roles         用户角色信息
      * @param permissions   用户所拥有的权限
      * @return              JWT令牌
      */
-    public static String createJWT(String username, List<String> roles, List<String> permissions) {
+    public static String createJWT(Long userId, List<String> roles, List<String> permissions) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtConstant.ROLES, roles);
         claims.put(JwtConstant.PERMISSIONS, permissions);
@@ -48,7 +48,7 @@ public class JwtUtils {
                 //设置令牌的过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 //设置令牌主题(所有者)
-                .setSubject(username)
+                .setSubject(userId.toString())
                 .compact();
     }
 
@@ -70,8 +70,10 @@ public class JwtUtils {
      * @param jwt  jwt令牌
      * @return     username
      */
-    public static String getUsername(String jwt){
-        return parseJWT(jwt).getSubject();
+    public static Long getUserId(String jwt){
+        String userId = parseJWT(jwt).getSubject();
+        return Long.valueOf(userId);
+
     }
 
 
