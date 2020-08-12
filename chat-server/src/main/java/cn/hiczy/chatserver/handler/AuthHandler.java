@@ -1,7 +1,9 @@
 package cn.hiczy.chatserver.handler;
 
+import cn.hiczy.common.utils.JwtUtils;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
+import cn.hiczy.protobuf.utils.SessionUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -25,22 +27,16 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         MessageProto.Message message = (MessageProto.Message) msg;
 
-        System.out.println(message);
-        System.out.println(message.getJwt());
-        System.out.println(message.getSessionId());
-        System.out.println(message.getType());
-        System.out.println(message.getPlainMessage());
-
-
-
-
         //校验登陆
         if(message.getType().equals(MessageProto.Message.MessageType.AUTH_REQ)){
-            if (isAuthed(message.getJwt())) {
-                ctx.pipeline().remove(this);
-                super.channelRead(ctx, msg);
-                return;
-            }
+//            JwtUtils.parseJWT().
+//            if (isAuthed(message.getJwt())) {
+//                Long userId = JwtUtils.getUserId(message.getJwt());
+//                SessionUtils.bindSession(userId,ctx.channel());
+//                ctx.pipeline().remove(this);
+//                super.channelRead(ctx, msg);
+//                return;
+//            }
         }
         //如果不是登陆请求拒绝访问
         MessageProto.Message authRsp = ProtoMessageUtils.createAuthRsp();
@@ -79,14 +75,6 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-    /**
-     * 通过解析jwt判断是否登陆
-     */
-    private boolean isAuthed(String jwt){
-        if(StringUtils.isEmpty(jwt))
-            return false;
-        return true;
-    }
 
 
 }

@@ -9,6 +9,8 @@ import cn.hiczy.protobuf.MessageProto.Message.MessageType;
 import cn.hiczy.protobuf.entity.TOfflineMessage;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -29,10 +31,6 @@ import java.util.stream.Collectors;
 @ChannelHandler.Sharable
 @Component
 public class OfflineMessageHandler extends ChannelInboundHandlerAdapter {
-
-
-//    @Resource
-//    private TMessageRecordMapper messageRecordMapper;
 
     @Resource
     private TOfflineMessageMapper offlineMessageMapper;
@@ -60,17 +58,28 @@ public class OfflineMessageHandler extends ChannelInboundHandlerAdapter {
                 break;
             //如果是其他类型的消息传给SenderHandler处理
             default:
+                //处理剩下的离线消息
+                handleRemainOfflineMsg(ctx);
                 ctx.fireChannelRead(msg);
         }
+    }
 
 
+    /**
+     * 将没有收到客户端发来的接收响应(OFFLINE_MSG_RCV)的离线消息再一次发送给客户端
+     * @param ctx ctx
+     */
+    private void handleRemainOfflineMsg(ChannelHandlerContext ctx) {
+        if(ObjectUtils.isEmpty(offlineMsgIds))
+           return;
 
+        List<TOfflineMessage> tOfflineMessages = offlineMessageMapper.selectBatchIds(offlineMsgIds);
+        tOfflineMessages.forEach(msg -> ctx.writeAndFlush(ProtoMessageUtils.convertToMessage(msg)));
     }
 
 
     /**
      * 处理离线消息请求
-     *
      * @param message
      */
     private void handleOfflineMsgReq(Message message, ChannelHandlerContext ctx) {
@@ -111,7 +120,7 @@ public class OfflineMessageHandler extends ChannelInboundHandlerAdapter {
         long mId = message.getMId();
         if(offlineMsgIds.contains(mId)){
             //将离线消息表中的离线信息 isDeleted 设为1
-
+            offlineMessageMapper.deleteById(mId);
             //将mId 从set 中移除
             offlineMsgIds.remove(mId);
         }
