@@ -2,8 +2,7 @@ package cn.hiczy.chatserver.netty;
 
 import cn.hiczy.chatserver.handler.AuthHandler;
 import cn.hiczy.chatserver.handler.OfflineMessageHandler;
-import cn.hiczy.chatserver.handler.ReceiverHandler;
-import cn.hiczy.chatserver.handler.SenderHandler;
+import cn.hiczy.chatserver.handler.MsgDispatcherHandler;
 import cn.hiczy.protobuf.MessageProto;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -20,10 +19,10 @@ import javax.annotation.Resource;
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Resource
-    private ReceiverHandler receiverHandler;
+    private MsgDispatcherHandler dispatcherHandler;
 
-    @Resource
-    private SenderHandler senderHandler;
+//    @Resource
+//    private SenderHandler senderHandler;
 
     @Resource
     private AuthHandler authHandler;
@@ -43,10 +42,15 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
                 //添加编码器相关组件
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new ProtobufEncoder())
+
+                //认证处理器
                 .addLast(authHandler)
+
+                //离线消息处理器
                 .addLast(offlineMessageHandler)
-                .addLast(receiverHandler)
-                .addLast(senderHandler);
+
+                //转发处理器
+                .addLast(dispatcherHandler);
 
     }
 }
