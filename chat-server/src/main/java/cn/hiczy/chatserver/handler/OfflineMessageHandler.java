@@ -9,12 +9,9 @@ import cn.hiczy.protobuf.MessageProto.Message.MessageType;
 import cn.hiczy.protobuf.entity.TOfflineMessage;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import org.apache.ibatis.ognl.ObjectElementsAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -74,7 +71,7 @@ public class OfflineMessageHandler extends ChannelInboundHandlerAdapter {
            return;
 
         List<TOfflineMessage> tOfflineMessages = offlineMessageMapper.selectBatchIds(offlineMsgIds);
-        tOfflineMessages.forEach(msg -> ctx.writeAndFlush(ProtoMessageUtils.convertToMessage(msg)));
+        tOfflineMessages.forEach(msg -> ctx.writeAndFlush(ProtoMessageUtils.buildOfflineMsgResponse(msg)));
     }
 
 
@@ -101,7 +98,7 @@ public class OfflineMessageHandler extends ChannelInboundHandlerAdapter {
 
         //将离线消息输出给客户端
         for(TOfflineMessage offlineMessage : offlineMsgList){
-            Message tmpMessage = ProtoMessageUtils.convertToMessage(offlineMessage);
+            Message tmpMessage = ProtoMessageUtils.buildOfflineMsgResponse(offlineMessage);
             ctx.writeAndFlush(tmpMessage);
         }
 
