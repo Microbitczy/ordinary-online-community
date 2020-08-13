@@ -26,7 +26,7 @@ public class MyClientHandler extends ChannelInboundHandlerAdapter {
         messageRecord.setToId(3L);
         messageRecord.setMessageType(MessageType.TEXT.getCode());
 
-        MessageProto.Message message = ProtoMessageUtils.convertToMessage(messageRecord);
+        MessageProto.Message message = ProtoMessageUtils.buildPlainMessage(messageRecord);
         ctx.writeAndFlush(message);
     }
 }

@@ -1,12 +1,15 @@
 package cn.hiczy.chatserver.handler;
 
 import cn.hiczy.chatserver.mapper.TMessageRecordMapper;
+import cn.hiczy.chatserver.mapper.TOfflineMessageMapper;
 import cn.hiczy.protobuf.MessageProto;
 import cn.hiczy.protobuf.MessageProto.Message;
 import cn.hiczy.protobuf.entity.TMessageRecord;
 import cn.hiczy.protobuf.PlainMessageProto;
+import cn.hiczy.protobuf.entity.TOfflineMessage;
 import cn.hiczy.protobuf.utils.ProtoMessageUtils;
 import cn.hiczy.protobuf.utils.SessionUtils;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -26,6 +29,9 @@ public class MsgDispatcherHandler extends ChannelInboundHandlerAdapter {
     @Resource
     private TMessageRecordMapper messageRecordMapper;
 
+    @Resource
+    private TOfflineMessageMapper offlineMessageMapper;
+
 
     /**
      * 服务器收到消息时的处理方式
@@ -41,7 +47,7 @@ public class MsgDispatcherHandler extends ChannelInboundHandlerAdapter {
         //判断接受的消息类型
         switch (receiveMsg.getType()){
             //普通消息
-            case PLAIN: handlePainMessage(receiveMsg); break;
+            case PLAIN: handlePainMessage(receiveMsg,ctx); break;
 //            //处理认证请求
 //            case AUTH_REQ: break;
         }
@@ -49,47 +55,30 @@ public class MsgDispatcherHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        //读取消息完成后返回 响应
-
-
-        super.channelReadComplete(ctx);
-    }
-
-
-    /**
-     * 当连接断开是被调用
-     * @param ctx
-     * @throws Exception
-     */
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        //当连接断开时,将userId 从redis中移除
-
-        super.channelInactive(ctx);
-    }
 
     /**
      * 处理普通消息
      * @param msg   消息
      * @return      处理后的响应
      */
-    private MessageProto.Message handlePainMessage(MessageProto.Message msg){
+    private void handlePainMessage(Message msg,ChannelHandlerContext ctx){
         //接收到消息后存入聊天记录数据库
         PlainMessageProto.PlainMessage plainMessage = msg.getPlainMessage();
         TMessageRecord tMessageRecord = ProtoMessageUtils.convertToTMessageRecord(msg);
         messageRecordMapper.insert(tMessageRecord);
-        //查询Redis中的set是否包含 toTd ,以此判断对方是否在线,如果不在线则将消息存入离线消息表中
-        if(SessionUtils.getChannel(msg.getPlainMessage().getToId()) == null){
-
-            //return //
+        Channel channel = SessionUtils.getChannel(msg.getPlainMessage().getToId());
+        //如果对方不在线
+        if(channel == null){
+            //存入离线消息库
+            TOfflineMessage offlineMessage = ProtoMessageUtils.convertToOfflineMsg(tMessageRecord);
+            offlineMessageMapper.insert(offlineMessage);
+            Message normalResponseOK = ProtoMessageUtils.buildNormalResponseOK(msg.getMId());
+            ctx.writeAndFlush(normalResponseOK);
+            return;
         }
 
-        //如果再线则将消息转发给toId用户
-
-
-        return null;
+        //如果在线则将消息转发给toId用户
+        ctx.writeAndFlush(msg);
     }
 
 
