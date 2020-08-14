@@ -43,6 +43,7 @@
         <protobuf.version>3.12.2</protobuf.version>
         <jwt.version>0.9.1</jwt.version>
         <hutools.version>5.3.10</hutools.version>
+        <servlet.version>4.0.3</servlet.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -133,6 +134,16 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
+
+
+
+            <!-- jakarta.servlet-api -->
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+            </dependency>
+
 
 
             <!-- kotlin -->
