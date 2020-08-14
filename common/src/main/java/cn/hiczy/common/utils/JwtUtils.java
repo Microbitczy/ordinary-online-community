@@ -23,6 +23,7 @@ public class JwtUtils {
     /*令牌的过期时间为3小时*/
     public static final long EXPIRATION = 1000 * 60 * 60 * 3;
 
+    public static final String AUTH_HEADER = "auth_header";
 
     /**
      * 创建JWT令牌

@@ -39,6 +39,7 @@ public enum ResultEnum {
     BAD_REQUEST(400, "请求参数或者语法不对"),
     UNAUTHORIZED(401, "认证失败"),
     LOGIN_ERROR(401, "登陆失败,用户名或密码错误!"),
+    TOKEN_EXPR(401, "令牌已过期,请重新登陆"),
     FORBIDDEN(403, "您的权限不足，无法访问该资源"),
     NOT_FOUND(404, "请求的资源不存在"),
     OPERATE_ERROR(405, "操作失败，请求操作的资源不存在"),
